@@ -1,44 +1,36 @@
 package cn.sun.hw.util;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
-
-import cn.sun.hw.model.sub.ResultVo;
-
-import java.io.IOException;
+import cn.sun.hw.model.sub.TranslateResultVo;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Base64;
 import java.util.Random;
 import java.util.Scanner;
 
 /**
  * http连接请求辅助
  */
-public class HttpClientUtil2 {
-	public HttpClientUtil2() {
+public class HttpClientAndTranslateUtil {
+	public HttpClientAndTranslateUtil() {
 
 	}
 
 	public static String doPostWithParam(String url, String value) {
 		// 创建一个post对象
 		HttpPost post = new HttpPost(url);
-		/*
-		 * if (headerMap != null) { for (Map.Entry<String, String> entry :
-		 * headerMap.entrySet()) { post.addHeader(entry.getKey(), entry.getValue()); } }
-		 */
+		
+//		  if (headerMap != null) { for (Map.Entry<String, String> entry :
+//		  headerMap.entrySet()) { post.addHeader(entry.getKey(), entry.getValue()); } }
+		 
 		// 包装成一个Entity对象
 
 		CloseableHttpClient httpClient = null;
@@ -125,7 +117,7 @@ public class HttpClientUtil2 {
 		} finally {
 			connection.disconnect();
 		}
-		ResultVo result = JacksonUtil.toJavaObject(response, ResultVo.class);
+		TranslateResultVo result = JacksonUtil.toJavaObject(response, TranslateResultVo.class);
 		System.out.println(JacksonUtil.toJSONString(result));
 		char[] charList = result.getTrans_result().get(0).getDst().toCharArray();
 		String str = new String(charList);

@@ -29,7 +29,7 @@ import cn.sun.hw.util.PdfCommon;
  */
 @Validated
 @RestController
-@RequestMapping("/sun")
+@RequestMapping("/medium")
 public class CatchController {
 
 	@Autowired
@@ -38,7 +38,12 @@ public class CatchController {
 	@GetMapping(value = "/getListCreatePdf")
 	public int createPdfList() {
 		System.out.println("getListCreatePdf start...");
-		testService.createPdfList();
+		try {
+			testService.createPdfList();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		System.out.println("getListCreatePdf end");
 		return 200;
 	}
@@ -52,7 +57,7 @@ public class CatchController {
 		List<UploadResult> files = new ArrayList<UploadResult>();
 		for (PostVo vo : pdfList) {
 			List<TextVo> list = vo.getViewerEdge().getFullContent().getBodyModel().getParagraphs();
-			UploadResult file = PdfCommon.generatePDF(list, vo.getId(), vo.getTitleName());
+			UploadResult file = PdfCommon.generatePDF(list, vo.getId(), vo.getTitleName(), vo.getClapCount());
 			files.add(file);
 		}
 

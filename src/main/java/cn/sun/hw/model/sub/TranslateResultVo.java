@@ -4,14 +4,14 @@ import java.io.Serializable;
 import java.util.List;
 
 import lombok.Data;
-
-public class ResultVo implements Serializable {
+//百度翻译请求返回对象
+public class TranslateResultVo implements Serializable {
 
 	private String from;
 	
 	private String to;
 	
-	private List<DstVo> trans_result;
+	private List<TranslaterResultDetailVO> trans_result;
 
 	public String getFrom() {
 		return from;
@@ -29,11 +29,11 @@ public class ResultVo implements Serializable {
 		this.to = to;
 	}
 
-	public List<DstVo> getTrans_result() {
+	public List<TranslaterResultDetailVO> getTrans_result() {
 		return trans_result;
 	}
 
-	public void setTrans_result(List<DstVo> trans_result) {
+	public void setTrans_result(List<TranslaterResultDetailVO> trans_result) {
 		this.trans_result = trans_result;
 	}
 	

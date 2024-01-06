@@ -2,8 +2,8 @@ package cn.sun.hw.model.sub;
 
 import java.io.Serializable;
 
-
-public class DstVo implements Serializable {
+//百度翻译请求返回对象
+public class TranslaterResultDetailVO implements Serializable {
 
 	private String src;
 	

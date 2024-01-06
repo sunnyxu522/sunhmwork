@@ -2,7 +2,7 @@ package cn.sun.hw.model.fetch;
 
 import java.io.Serializable;
 
-
+//graphql查询数据json对应object
 public class QueryInfo implements Serializable {
 
 

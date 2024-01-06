@@ -15,13 +15,17 @@ import cn.sun.hw.model.sub.UploadResult;
 
 public class PdfCommon {
 
-	public static UploadResult generatePDF(List<TextVo> list, String fileName, String titleName) {
+	public static UploadResult generatePDF(List<TextVo> list, String fileName, String titleName,long clapCount) {
 		Document document = null;
 		try {
 			document = PdfUtil.createDocument();
 
 			UploadResult fileUploadResult = new UploadResult();
-			fileUploadResult.setPath("C:\\" + fileName + ".pdf");
+			String nameSub = titleName;
+			if(titleName.length()>8) {
+				nameSub=titleName.substring(0, 8);
+			}
+			fileUploadResult.setPath("C:\\" + fileName+"|" +nameSub+".pdf");
 			fileUploadResult.setName(fileName);
 			FileOutputStream fos = new FileOutputStream(fileUploadResult.getPath());
 			PdfWriter.getInstance(document, fos);
@@ -37,10 +41,15 @@ public class PdfCommon {
 			title.setAlignment(Element.ALIGN_CENTER);
 			document.add(title);
 			document.add(new Paragraph("   "));
-
+			
+			String concent = "点赞数："+clapCount;
+			Paragraph paragraph2 = new Paragraph(concent, textfont);
+			paragraph2.setAlignment(Element.ALIGN_LEFT);
+			document.add(paragraph2);
+			
 			for (TextVo textVo : list) {
-				String concent = textVo.getText();
-				Paragraph paragraph2 = new Paragraph(concent, textfont);
+				String concent1 = textVo.getText();
+				Paragraph paragraph3 = new Paragraph(concent, textfont);
 				paragraph2.setAlignment(Element.ALIGN_CENTER);
 				document.add(paragraph2);
 			}

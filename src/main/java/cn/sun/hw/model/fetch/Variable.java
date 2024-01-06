@@ -3,7 +3,7 @@ package cn.sun.hw.model.fetch;
 import java.io.Serializable;
 
 import lombok.Data;
-
+////graphql查询数据json对应object
 public class Variable implements Serializable {
 
 
