@@ -1,6 +1,8 @@
 package cn.sun.hw.util;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
@@ -80,8 +82,7 @@ public class HttpClientAndTranslateUtil {
 		return randomNum;
 	}
 
-	public static String translateEnText(String textToTranslate)
-			throws IOException, NoSuchAlgorithmException, InterruptedException {
+	public static String translateEnText(String textToTranslate) {
 		String id = "20240106001933027";
 		String apiKey = "fuKhqU5nz9Bfy1cX37Fh"; // Replace with your API key
 		String fromLanguage = "en"; // 英文
@@ -89,23 +90,41 @@ public class HttpClientAndTranslateUtil {
 		String baseUrl = "https://fanyi-api.baidu.com/api/trans/vip/translate";
 		String salt = getRandomNum();
 		String sign = id + textToTranslate + salt + apiKey;
-		Thread.sleep(1200);// QPS限制
-		MessageDigest md = MessageDigest.getInstance("MD5");
-		byte[] messageDigest = md.digest(sign.getBytes());
-
+		try {
+			Thread.sleep(1200);
+		} catch (InterruptedException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}// QPS限制
+		MessageDigest md;
 		StringBuilder hexBuilder = new StringBuilder();
-		for (byte b : messageDigest) {
-			hexBuilder.append(Integer.toHexString((b & 0xFF) | 0x100).substring(1, 3));
+		try {
+			md = MessageDigest.getInstance("MD5");
+			byte[] messageDigest = md.digest(sign.getBytes());
+			for (byte b : messageDigest) {
+				hexBuilder.append(Integer.toHexString((b & 0xFF) | 0x100).substring(1, 3));
+			}
+		} catch (NoSuchAlgorithmException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
 		}
-		String requestData = "?q=" + URLEncoder.encode(textToTranslate, "UTF-8") + "&from=" + fromLanguage + "&to="
-				+ toLanguage + "&appid=" + id + "&salt=" + salt + "&sign=" + hexBuilder.toString().toLowerCase();
+		
+		HttpURLConnection connection=null;
+		try {
+			String requestData = "?q=" + URLEncoder.encode(textToTranslate, "UTF-8") + "&from=" + fromLanguage + "&to="
+					+ toLanguage + "&appid=" + id + "&salt=" + salt + "&sign=" + hexBuilder.toString().toLowerCase();
+		
 		URL url = new URL(baseUrl + requestData);
-		HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+		connection = (HttpURLConnection) url.openConnection();
 		connection.setRequestMethod("GET");
 //		  connection.setRequestProperty("Content-Type", "application/json");
 //		  connection.setRequestProperty("User-Agent", "Mozilla/5.0");
 		connection.setDoOutput(true);
 		connection.connect();
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		String response = "";
 		try (Scanner scanner = new Scanner(connection.getInputStream())) {
 			while (scanner.hasNextLine()) {
@@ -125,7 +144,7 @@ public class HttpClientAndTranslateUtil {
 		return str;
 	}
 
-	public static void main(String[] args) throws Exception {
+	public static void main(String[] args)  {
 		    	String textToTranslate = "This is an example paragraph to translate from English to Chinese.";  
 		    	String response = translateEnText(textToTranslate);
 		        System.out.println(response); // Print the translated text to the console  

@@ -9,6 +9,8 @@ public class PostVo implements Serializable {
 	
 	private String titleName;
 	
+	private String titleNameCn;
+	
 	private long  clapCount;
 
 	private ViewerEdge viewerEdge;
@@ -44,5 +46,14 @@ public class PostVo implements Serializable {
 	public void setClapCount(long clapCount) {
 		this.clapCount = clapCount;
 	}
+
+	public String getTitleNameCn() {
+		return titleNameCn;
+	}
+
+	public void setTitleNameCn(String titleNameCn) {
+		this.titleNameCn = titleNameCn;
+	}
+
 	
 }

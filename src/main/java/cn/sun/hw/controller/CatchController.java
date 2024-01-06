@@ -45,19 +45,19 @@ public class CatchController {
 			e.printStackTrace();
 		}
 		System.out.println("getListCreatePdf end");
-		return 200;
+		return 1;
 	}
 
 	@GetMapping(value = "/download")
 	public void download(HttpServletResponse response, HttpServletRequest request) {
-		System.out.println("11111111111");
+		System.out.println("download pdf start");
 
 		List<PostVo> pdfList = HmWorkServiceImpl.pdfList;
 		System.out.println("pdfList=" + pdfList.size());
 		List<UploadResult> files = new ArrayList<UploadResult>();
 		for (PostVo vo : pdfList) {
 			List<TextVo> list = vo.getViewerEdge().getFullContent().getBodyModel().getParagraphs();
-			UploadResult file = PdfCommon.generatePDF(list, vo.getId(), vo.getTitleName(), vo.getClapCount());
+			UploadResult file = PdfCommon.generatePDF(list, vo.getId(), vo.getTitleName(), vo.getTitleNameCn(),vo.getClapCount());
 			files.add(file);
 		}
 

@@ -15,7 +15,7 @@ import cn.sun.hw.model.sub.UploadResult;
 
 public class PdfCommon {
 
-	public static UploadResult generatePDF(List<TextVo> list, String fileName, String titleName,long clapCount) {
+	public static UploadResult generatePDF(List<TextVo> list, String fileName, String titleName,String titleNameCn,long clapCount) {
 		Document document = null;
 		try {
 			document = PdfUtil.createDocument();
@@ -38,8 +38,13 @@ public class PdfCommon {
 
 			// 生成居中标题
 			Paragraph title = PdfUtil.createParagraph(titleName, titlefont);
-			title.setAlignment(Element.ALIGN_CENTER);
+			title.setAlignment(Element.ALIGN_LEFT);
 			document.add(title);
+			document.add(new Paragraph("   "));
+			//中文标题
+			Paragraph titleCN = PdfUtil.createParagraph(titleNameCn, titlefont);
+			title.setAlignment(Element.ALIGN_LEFT);
+			document.add(titleCN);
 			document.add(new Paragraph("   "));
 			
 			String concent = "点赞数："+clapCount;

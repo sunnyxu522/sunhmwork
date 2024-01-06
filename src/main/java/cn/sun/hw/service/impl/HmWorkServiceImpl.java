@@ -41,24 +41,28 @@ public class HmWorkServiceImpl implements HmWorkService {
 	public void createPdfList() throws Exception {
 		HmWorkServiceImpl test = new HmWorkServiceImpl();
 		try {
+			//分页获取所有文章列表
 			test.getList("0", "30", 30);
 		} catch (Exception e) {
 			System.out.println("抓取完毕");
 		}
+		//排序文章的点赞数
 		Collections.sort(datalist, new Comparator<DataPost>() {
 			@Override
 			public int compare(DataPost o1, DataPost o2) {
 				return Long.compare(o2.getClapCount(), o1.getClapCount()); // 按点赞进行排序
 			}
 		});
-		// 详情
+		// top10文章获取详情
 		for (int i = 0; i < 10; i++) {
 			DataPost dataPost = datalist.get(i);
 			test.getDetail(dataPost);
 		}
 		System.out.println("pdfList.size ={}"+datalist.size());
 	}
-
+	/**
+	 * 获取点赞数top10的详细
+	 */
 	public PostVo getDetail(DataPost post) throws  Exception {
 		String url = "https://medium.com/_/graphql";
 
@@ -88,7 +92,9 @@ public class HmWorkServiceImpl implements HmWorkService {
 			PostVo postVo = volist.get(0).getData().getPost();
 			postVo.setTitleName(post.getTitle());
 			postVo.setClapCount(post.getClapCount());
-			HttpClientAndTranslateUtil.translateEnText(postVo.getTitleName());
+			String titleNameCn = HttpClientAndTranslateUtil.translateEnText(postVo.getTitleName());
+			//翻译成中文的文章标题
+			postVo.setTitleNameCn(titleNameCn);
 //			HttpClientAndTranslateUtil.translateEnText(postVo.getViewerEdge().getFullContent());
 			pdfList.add(postVo);
 			return postVo;
