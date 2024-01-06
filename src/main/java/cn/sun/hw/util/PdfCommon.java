@@ -21,7 +21,7 @@ public class PdfCommon {
 			document = PdfUtil.createDocument();
 
 			UploadResult fileUploadResult = new UploadResult();
-			fileUploadResult.setPath("D:\\" + fileName + ".pdf");
+			fileUploadResult.setPath("C:\\" + fileName + ".pdf");
 			fileUploadResult.setName(fileName);
 			FileOutputStream fos = new FileOutputStream(fileUploadResult.getPath());
 			PdfWriter.getInstance(document, fos);

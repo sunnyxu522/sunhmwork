@@ -28,9 +28,6 @@
 		<beanutils.version>1.9.4</beanutils.version>
 		<dom4j.version>2.1.3</dom4j.version>
 	
-		<!-- swagger -->
-		<swagger.version>2.9.2</swagger.version>
-		<swagger.bootstrap.version>1.9.6</swagger.bootstrap.version>
 	</properties>
 
 	<dependencies>
@@ -47,23 +44,6 @@
             <version>5.2.0</version>
         </dependency>
 	
-		<!-- swagger start -->
-		<dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger2</artifactId>
-            <version>${swagger.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger-ui</artifactId>
-            <version>${swagger.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.github.xiaoymin</groupId>
-            <artifactId>knife4j-spring-boot-starter</artifactId>
-            <version>2.0.8</version>
-        </dependency>
-		<!-- swagger end -->
 		<dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
@@ -134,23 +114,6 @@
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
 		</dependency>
-		<!-- jedis start -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-redis</artifactId>
-			<exclusions>
-				<exclusion>
-					<groupId>io.lettuce</groupId>
-					<artifactId>lettuce-core</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		<dependency>
-			<groupId>redis.clients</groupId>
-			<artifactId>jedis</artifactId>
-		</dependency>
-		<!-- jedis end -->
-		
 		
 		<!-- poi start -->
 		<dependency>
@@ -248,7 +211,6 @@
         </repository>
 	</repositories>
 
-	<!-- 引入spring cloud的依赖，不能少，主要用来管理Spring Cloud生态各组件的版本 -->
 
 	<build>
 		<resources>

@@ -13,9 +13,7 @@ import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-/**
- * jackjson负责类* @author ztzh_gonghl * @date 2021年3月25日
- */
+
 @SuppressWarnings("deprecation")
 public class JacksonUtil {
 

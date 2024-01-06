@@ -6,11 +6,6 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.PropertySources;
 
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
-
-
-
-@EnableSwagger2
 @SpringBootApplication
 @PropertySources({ @PropertySource("classpath:application.properties") })
 @ComponentScan(basePackages = { "cn.sun.hw"})
