@@ -1,7 +1,5 @@
 package cn.sun.hw.service.impl;
 
-import java.io.IOException;
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -42,7 +40,7 @@ public class HmWorkServiceImpl implements HmWorkService {
 		HmWorkServiceImpl test = new HmWorkServiceImpl();
 		try {
 			//分页获取所有文章列表
-			test.getList("0", "30", 30);
+			test.getList("0", "20", 20);
 		} catch (Exception e) {
 			System.out.println("抓取完毕");
 		}

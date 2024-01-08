@@ -12,8 +12,9 @@ public class PostVo implements Serializable {
 	private String titleNameCn;
 	
 	private long  clapCount;
-
 	private ViewerEdge viewerEdge;
+
+	
 
 	public String getId() {
 		return id;

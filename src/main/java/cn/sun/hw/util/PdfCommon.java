@@ -54,9 +54,9 @@ public class PdfCommon {
 			
 			for (TextVo textVo : list) {
 				String concent1 = textVo.getText();
-				Paragraph paragraph3 = new Paragraph(concent, textfont);
+				Paragraph paragraph3 = new Paragraph(concent1, textfont);
 				paragraph2.setAlignment(Element.ALIGN_CENTER);
-				document.add(paragraph2);
+				document.add(paragraph3);
 			}
 
 			return fileUploadResult;
